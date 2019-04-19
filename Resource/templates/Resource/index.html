@@ -1,0 +1,15 @@
+{% extends 'Resource/base.html' %}
+
+{% block body %}
+    {% if categories %}
+        <p>Categories: </p>
+        <ul>
+            <li><a href="{% url 'Resource:all_files_view' %}">All Files</a></li>
+            {% for category in categories %}
+                <li><a href="{% url 'Resource:category_view' category.id %}">{{ category }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Sorry but there are no categories</p>
+    {% endif %}
+{% endblock %}

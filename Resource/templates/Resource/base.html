@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}DSC Resource Platform{% endblock %}</title>
+</head>
+<body>
+    <a href="{% url 'Resource:index' %}">Home</a>
+    <br>
+    <a href="{% url 'Resource:filecreate' %}">Upload File</a>
+    <br>
+    {{ current_user.username }}
+    <br>
+    <a href="{% url 'logout_view' %}">Log Out</a>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

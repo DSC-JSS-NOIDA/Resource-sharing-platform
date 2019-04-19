@@ -1,0 +1,8 @@
+{% if files %}
+    <ul>
+    {% for file in files %}
+        <li>{{ file }}</li>
+    {% endfor %}
+{% else %}
+    <p>Sorry no file under such category found</p>
+{% endif %}
