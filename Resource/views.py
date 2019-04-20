@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.http import HttpResponseRedirect
 
 from .forms import UserLoginForm, UserRegisterForm
 from .models import Category, ResFile, IsFavourite
@@ -100,15 +101,12 @@ def logout_view(request):
 def is_favourite(request, file_id):
     current_user = request.user
     current_file = get_object_or_404(ResFile, pk=file_id)
-    fav = IsFavourite()
-    fav.file = current_file
-    fav.user = current_user
-    if fav in IsFavourite.objects.all():
-        favourites = IsFavourite.objects.get(user=current_user, file=current_file)
-        favourites.delete()
+    p, created = IsFavourite.objects.get_or_create(
+    file = current_file,
+    user = current_user
+    )
+    if created:
+        p.save()
     else:
-        fav.save()
-    context = {
-        
-    }
-    #return redirect('/')
+        p.delete()
+    return redirect('/')
