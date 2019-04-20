@@ -20,6 +20,6 @@ class ResFile(models.Model):
     def get_absolute_url(self):
         return reverse('Resource:index')
 
-'''class IsFavourite(models.Model):
+class IsFavourite(models.Model):
     file = models.ForeignKey(ResFile, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)'''
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

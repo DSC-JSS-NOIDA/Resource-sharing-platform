@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, get_user_model, login, logout
 
 from .forms import UserLoginForm, UserRegisterForm
-from .models import Category, ResFile
+from .models import Category, ResFile, IsFavourite
 
 
 # Create your views here.
@@ -90,7 +90,25 @@ def register_view(request):
     }
     return render(request, 'Resource/signup.html', context)
 
+
 @login_required
 def logout_view(request):
     logout(request)
     return redirect('Resource:index')
+
+
+def is_favourite(request, file_id):
+    current_user = request.user
+    current_file = get_object_or_404(ResFile, pk=file_id)
+    fav = IsFavourite()
+    fav.file = current_file
+    fav.user = current_user
+    if fav in IsFavourite.objects.all():
+        favourites = IsFavourite.objects.get(user=current_user, file=current_file)
+        favourites.delete()
+    else:
+        fav.save()
+    context = {
+        
+    }
+    #return redirect('/')
