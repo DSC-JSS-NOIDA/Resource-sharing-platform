@@ -4,10 +4,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
 
 from .forms import UserLoginForm, UserRegisterForm
 from .models import Category, ResFile, IsFavourite
+import json
 
 
 # Create your views here.
@@ -103,10 +104,12 @@ def is_favourite(request, file_id):
     current_file = get_object_or_404(ResFile, pk=file_id)
     p, created = IsFavourite.objects.get_or_create(
     file = current_file,
-    user = current_user
+    user = current_user,
     )
     if created:
         p.save()
     else:
         p.delete()
-    return redirect('/')
+    return JsonResponse(
+        {"status":"success"}
+    )

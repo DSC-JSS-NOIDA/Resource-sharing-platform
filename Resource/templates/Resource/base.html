@@ -9,10 +9,26 @@
     <br>
     <a href="{% url 'Resource:filecreate' %}">Upload File</a>
     <br>
-    {{ current_user.username }}
+    {{ request.user.username }}
     <br>
     <a href="{% url 'logout_view' %}">Log Out</a>
     {% block body %}
     {% endblock %}
+    
 </body>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"
+			  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+			  crossorigin="anonymous"></script>
+<script>
+    function sendData(id){
+        console.log(id);
+    $.ajax({
+        url: `/Resource/favourite/${id}/`,
+        type: "GET",
+        success: function (data) {
+          console.log(data);
+        }
+      });
+    }
+</script>
 </html>

@@ -1,8 +1,12 @@
-{% if files %}
-    <ul>
-    {% for file in files %}
-        <li><a href="{% url 'Resource:is_favourite' file.id %}">{{ file }}</a></li>
-    {% endfor %}
-{% else %}
-    <p>Sorry no file under such category found</p>
-{% endif %}
+{% extends 'Resource/base.html' %}
+
+{% block body %}
+    {% if files %}
+        <ul>
+        {% for file in files %}
+            <li><a href="#" onclick="sendData({{file.id}})">{{ file }}</a></li>
+        {% endfor %}
+    {% else %}
+        <p>Sorry no file under such category found</p>
+    {% endif %}
+{% endblock %}
