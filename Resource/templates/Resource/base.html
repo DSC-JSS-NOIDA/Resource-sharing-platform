@@ -7,6 +7,8 @@
 <body>
     <a href="{% url 'Resource:index' %}">Home</a>
     <br>
+    <a href="{% url 'Resource:favourite_view' %}">My Favourites</a>
+    <br>
     <a href="{% url 'Resource:filecreate' %}">Upload File</a>
     <br>
     {{ request.user.username }}

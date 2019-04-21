@@ -27,7 +27,8 @@ def category_view(request, category_id):
     req_category = get_object_or_404(Category, pk= category_id)
     files = ResFile.objects.filter(category=req_category)
     context = {
-        'files' : files
+        'files' : files,
+        'title' : req_category.category,
     }
     return render(request, 'Resource/category_view.html', context)
 
@@ -35,7 +36,8 @@ def category_view(request, category_id):
 def all_files_view(request):
     files = ResFile.objects.all()
     context = {
-        'files' : files
+        'files' : files,
+        'title' : 'All Files',
     }
     return render(request, 'Resource/category_view.html', context)
 
@@ -113,3 +115,16 @@ def is_favourite(request, file_id):
     return JsonResponse(
         {"status":"success"}
     )
+
+def favourite_view(request):
+    current_user = request.user
+    filess = IsFavourite.objects.filter(user=current_user)
+    files = []
+    for f in filess:
+        files.append(f.file)
+    context = {
+        'files' : files,
+        'title' : 'My Favourites',
+    }
+    return render(request, 'Resource/category_view.html', context)
+    
