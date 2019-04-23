@@ -6,9 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http import HttpResponse, JsonResponse
 
-from .forms import UserLoginForm, UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm, User
 from .models import Category, ResFile, IsFavourite
-import json
+
 
 
 # Create your views here.
@@ -45,7 +45,9 @@ def all_files_view(request):
 class FileCreate(LoginRequiredMixin, CreateView):
     model = ResFile
     fields = ['title', 'description', 'category', 'tags', 'link']
-
+    def form_valid(self, form):
+        form.instance.uploader = self.request.user
+        return super().form_valid(form)
     
 def login_view(request):
     current_user = request.user
@@ -101,6 +103,7 @@ def logout_view(request):
     return redirect('Resource:index')
 
 
+@login_required
 def is_favourite(request, file_id):
     current_user = request.user
     current_file = get_object_or_404(ResFile, pk=file_id)
@@ -116,6 +119,7 @@ def is_favourite(request, file_id):
         {"status":"success"}
     )
 
+@login_required
 def favourite_view(request):
     current_user = request.user
     filess = IsFavourite.objects.filter(user=current_user)
