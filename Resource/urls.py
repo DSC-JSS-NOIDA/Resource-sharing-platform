@@ -10,4 +10,5 @@ urlpatterns = [
     path('filecreate/', views.FileCreate.as_view(), name="filecreate"),
     path('favourite/<int:file_id>/', views.is_favourite, name='is_favourite'),
     path('myfavourites/', views.favourite_view, name='favourite_view'),
+    path('myuploads/', views.my_uploads, name='my_uploads'),
 ]

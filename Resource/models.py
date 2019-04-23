@@ -19,7 +19,7 @@ class ResFile(models.Model):
     uploader = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self):
-        return self.title+' by '
+        return self.title+' by '+self.uploader.username
     def get_absolute_url(self):
         return reverse('Resource:index')
 

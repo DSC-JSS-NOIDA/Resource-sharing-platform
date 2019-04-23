@@ -131,4 +131,14 @@ def favourite_view(request):
         'title' : 'My Favourites',
     }
     return render(request, 'Resource/category_view.html', context)
+
+@login_required
+def my_uploads(request):
+    current_user = request.user
+    files = ResFile.objects.filter(uploader=current_user)
+    context = {
+        'files' : files,
+        'title' : 'My Uploads',
+    }
+    return render(request, 'Resource/category_view.html', context)
     
