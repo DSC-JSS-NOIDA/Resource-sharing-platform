@@ -15,7 +15,7 @@ class ResFile(models.Model):
     description = models.CharField(max_length=1500)
     category = models.ForeignKey(Category, null=True,  on_delete = models.SET_NULL)
     tags = models.CharField(max_length=500)
-    link = models.CharField(default = '', max_length=1000)
+    file = models.FileField(upload_to='uploads/', null=True)
     uploader = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self):

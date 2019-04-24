@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http import HttpResponse, JsonResponse
+from filetransfers.api import serve_file, prepare_upload
 
 from .forms import UserLoginForm, UserRegisterForm, User
 from .models import Category, ResFile, IsFavourite
@@ -44,7 +45,7 @@ def all_files_view(request):
 
 class FileCreate(LoginRequiredMixin, CreateView):
     model = ResFile
-    fields = ['title', 'description', 'category', 'tags', 'link']
+    fields = ['title', 'description', 'category', 'tags', 'file']
     def form_valid(self, form):
         form.instance.uploader = self.request.user
         return super().form_valid(form)
@@ -141,4 +142,9 @@ def my_uploads(request):
         'title' : 'My Uploads',
     }
     return render(request, 'Resource/category_view.html', context)
+
+@login_required
+def download(request, file_id):
+    upload = get_object_or_404(ResFile, pk=file_id)
+    return serve_file(request, upload.file)
     

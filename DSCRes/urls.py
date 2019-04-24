@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from Resource import views
+from . import settings
 
 
 urlpatterns = [
@@ -11,3 +12,4 @@ urlpatterns = [
     path('accounts/register/', views.register_view, name="register_view"),
     path('accounts/logout', views.logout_view, name="logout_view"),
 ]
+

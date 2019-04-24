@@ -5,7 +5,7 @@
     {% if files %}
         <ul>
         {% for file in files %}
-            <li><a href="#" onclick="sendData({{file.id}})">{{ file }}</a></li>
+            <li><a href="#" onclick="sendData({{file.id}})">{{ file }}</a><a href="{% url 'Resource:download' file.id %}">Download</a></li>
         {% endfor %}
     {% else %}
         <p>Sorry no file under such category found</p>
