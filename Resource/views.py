@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http import HttpResponse, JsonResponse
-from filetransfers.api import serve_file, prepare_upload
+from filetransfers.api import serve_file
 
 from .forms import UserLoginForm, UserRegisterForm, User
 from .models import Category, ResFile, IsFavourite
