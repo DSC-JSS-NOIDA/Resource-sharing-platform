@@ -16,10 +16,8 @@ from .models import Category, ResFile, IsFavourite
 @login_required
 def index(request):
     categories = Category.objects.all()
-    current_user = request.user
     context = {
         'categories' : categories,
-        'current_user' : current_user,
     }
     return render(request, 'Resource/index.html', context)
 

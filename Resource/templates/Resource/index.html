@@ -1,15 +1,61 @@
 {% extends 'Resource/base.html' %}
+{% load static %}
 
 {% block body %}
-    {% if categories %}
-        <p>Categories: </p>
-        <ul>
-            <li><a href="{% url 'Resource:all_files_view' %}">All Files</a></li>
-            {% for category in categories %}
-                <li><a href="{% url 'Resource:category_view' category.id %}">{{ category }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Sorry but there are no categories</p>
-    {% endif %}
+{% if categories %}
+
+ <main>
+  <div class="container">
+   <section class="mt-5 wow fadeIn">
+    <h3 class="h3 text-center mb-5">Categories</h3>
+     
+     <div class="row">
+      <a href="{% url 'Resource:all_files_view' %}"><div class="col-md-4 mb-4">
+       
+       <div data-aos="fade-up-right">
+        <div class="card">
+         
+          <img class="card-img-top" src="{% static 'Resource/img/java.jpg' %}" alt="Card image cap">
+
+          <div class="card-body">
+           
+           <h4 class="card-title"><a>All Files</a></h4>
+           <p class="card-text">For all kinds of files</p>
+
+          </div>
+
+        </div>
+       </div>
+          <!-- Card1 -->
+
+      </div></a>
+      {% for category in categories %}
+      <a href="{% url 'Resource:category_view' category.id %}"><div class="col-md-4 mb-4">
+       
+       <div data-aos="fade-up-right">
+        <div class="card">
+         
+          <img class="card-img-top" src="{% static 'Resource/img/java.jpg' %}" alt="Card image cap">
+
+          <div class="card-body">
+           
+           <h4 class="card-title"><a>{{ category }}</a></h4>
+           <p class="card-text">Category Description</p>
+
+          </div>
+
+        </div>
+       </div>
+          <!-- Card1 -->
+
+      </div></a>
+      {% endfor %}
+
+     </div>
+    </section>
+  </div>
+ </main>
+{% else %}
+    <p>Sorry but there are no categories</p>
+{% endif %}
 {% endblock %}
