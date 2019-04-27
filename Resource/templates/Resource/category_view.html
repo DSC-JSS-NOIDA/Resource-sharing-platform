@@ -1,13 +1,35 @@
 {% extends 'Resource/base.html' %}
 
 {% block body %}
-    <h1>{{ title }} :</h1>
+    <main>
+    <div class="container">
+    <h3 style="margin-top: 90px;">{{ title }} :</h3>
+    <br>
     {% if files %}
-        <ul>
         {% for file in files %}
-            <li><a href="#" onclick="sendData({{file.id}})">{{ file }}</a><a href="{% url 'Resource:download' file.id %}">Download</a></li>
+         <div class="row">
+          <div class="col-md-12 lg-12">
+
+           <div class="card">
+            <div class="card-header">
+             {{ file.uploader }}
+            </div>
+            <div class="card-body">
+             <h5 class="card-title">{{ file.title }}</h5>
+             <p class="card-text">{{ file.description }}</p>
+             <a href="{% url 'Resource:download' file.id %}" class="btn btn-blue-grey">Download</a>
+             <a onclick="sendData({{file.id}})" class="btn btn-blue-grey">Favourite</a>
+            </div>
+           </div>
+          </div> 
+         </div>
+         <br>
         {% endfor %}
     {% else %}
         <p>Sorry no file under such category found</p>
     {% endif %}
+    </div>    
+    </main>
 {% endblock %}
+
+            <!--<li><a href="#" onclick="sendData({{file.id}})">{{ file }}</a><a href="{% url 'Resource:download' file.id %}">Download</a></li>-->
