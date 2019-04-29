@@ -160,7 +160,7 @@ def searchposts(request):
         submitbutton= request.GET.get('submit')
 
         if query is not None:
-            lookups= Q(title__icontains=query) | Q(description__icontains=query) | Q(tags__icontains=query) | Q(tags__icontains=query)
+            lookups= Q(title__icontains=query) | Q(description__icontains=query) | Q(tags__icontains=query) | Q(category__category__icontains=query)
 
             results= ResFile.objects.filter(lookups).distinct()
 
