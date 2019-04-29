@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http import HttpResponse, JsonResponse
 from filetransfers.api import serve_file
+from django.db.models import Q
 
 from .forms import UserLoginForm, UserRegisterForm, User
 from .models import Category, ResFile, IsFavourite
@@ -150,4 +151,29 @@ def my_uploads(request):
 def download(request, file_id):
     upload = get_object_or_404(ResFile, pk=file_id)
     return serve_file(request, upload.file)
+
+@login_required
+def searchposts(request):
+    if request.method == 'GET':
+        query= request.GET.get('q')
+
+        submitbutton= request.GET.get('submit')
+
+        if query is not None:
+            lookups= Q(title__icontains=query) | Q(description__icontains=query) | Q(tags__icontains=query)
+
+            results= ResFile.objects.filter(lookups).distinct()
+
+            context={'files': results,
+                     'submitbutton': submitbutton,
+                     'title' : 'Search results'
+            }
+
+            return render(request, 'Resource/category_view.html', context)
+
+        else:
+            return render(request, 'Resource/category_view.html')
+
+    else:
+        return render(request, 'Resource/category_view.html')
     

@@ -12,6 +12,7 @@ urlpatterns = [
     path('myfavourites/', views.favourite_view, name='favourite_view'),
     path('myuploads/', views.my_uploads, name='my_uploads'),
     path('download/<int:file_id>/', views.download, name='download'),
+    path('search/', views.searchposts, name='searchposts'),
 ]
 
 
