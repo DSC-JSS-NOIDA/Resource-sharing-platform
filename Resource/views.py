@@ -18,6 +18,7 @@ def index(request):
     categories = Category.objects.all()
     context = {
         'categories' : categories,
+        'index' : True,
     }
     return render(request, 'Resource/index.html', context)
 
@@ -28,6 +29,7 @@ def category_view(request, category_id):
     context = {
         'files' : files,
         'title' : req_category.category,
+        'index' : True,
     }
     return render(request, 'Resource/category_view.html', context)
 
@@ -37,6 +39,7 @@ def all_files_view(request):
     context = {
         'files' : files,
         'title' : 'All Files',
+        'index' : True,
     }
     return render(request, 'Resource/category_view.html', context)
 
@@ -128,6 +131,7 @@ def favourite_view(request):
     context = {
         'files' : files,
         'title' : 'My Favourites',
+        'favourite_view' : True,
     }
     return render(request, 'Resource/category_view.html', context)
 
@@ -138,6 +142,7 @@ def my_uploads(request):
     context = {
         'files' : files,
         'title' : 'My Uploads',
+        'upload_view' : True,
     }
     return render(request, 'Resource/category_view.html', context)
 
