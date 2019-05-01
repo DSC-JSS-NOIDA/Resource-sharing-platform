@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
-
+from django.contrib.auth.forms import UserCreationForm
 
 User = get_user_model()
 
@@ -22,27 +22,18 @@ class UserLoginForm(forms.Form):
                 raise forms.ValidationError('not active')
         return super(UserLoginForm, self).clean(*args, **kwargs)
     
-class UserRegisterForm(forms.ModelForm):
-    
-    email = forms.EmailField(label='Email address')
-    email2 = forms.EmailField(label='Confirm email')
-    password = forms.CharField(widget=forms.PasswordInput)
+class UserRegisterForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ['username','email','email2','password']
-    
+        fields = ['username','email','password1', 'password2']
+        widgets = {
+            'username': forms.TextInput(attrs={'class':'form-control'}),
+            'email': forms.TextInput(attrs={'class':'form-control'}),
+            'password1': forms.PasswordInput(attrs={'class':'form-control'}),
+            'password2': forms.PasswordInput(attrs={'class':'form-control'}),
+        }
         
-    def clean(self, *args, **kwargs):
-        email = self.cleaned_data.get('email')
-        email2 = self.cleaned_data.get('email2')
-        if email != email2:
-            raise forms.ValidationError('Emails not match')
-        email_qs = User.objects.filter(email=email)
-        if email_qs.exists():
-            raise forms.ValidationError('Email is already taken')
-        return super(UserRegisterForm, self).clean(*args, **kwargs)
-    
         
         
         

@@ -1,8 +1,8 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>DSC Project</title>
@@ -11,13 +11,13 @@
   <!--Scroll part -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Bootstrap core CSS -->
-  <link href="{% static 'Resource/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="{% static 'Resource/css/mdb.min.css' %}" rel="stylesheet">
+  <link href="css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="{% static 'Resource/css/style.min.css' %}" rel="stylesheet">
+  <link href="css/style.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="{% static 'Resource/css/style.min.css' %}" rel="stylesheet">
+  <link href="css/style.min.css" rel="stylesheet">
   <style type="text/css">
    html,
     body,
@@ -49,14 +49,13 @@
               }
           }
   </style>
+
 </head>
+
 <body>
-    <!--<form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit">
-    </form>-->
-      <div class="view full-page-intro" style="background-image: url('https://previews.123rf.com/images/mamanamsai/mamanamsai1509/mamanamsai150900879/46093868-engineer-concept-design-on-dark-background-clean-vector.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+  <!-- Full Page Intro -->
+  <div class="view full-page-intro" style="background-image: url('https://previews.123rf.com/images/mamanamsai/mamanamsai1509/mamanamsai150900879/46093868-engineer-concept-design-on-dark-background-clean-vector.jpg'); background-repeat: no-repeat; background-size: cover;">
 
     <!-- Mask & flexbox options-->
     <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -84,77 +83,50 @@
               <div class="card-body">
 
                 <!-- Form -->
-                <form method="post">
-                 {% csrf_token %}
-                 
+                <form name="">
                   <!-- Heading -->
                   <h3 class="dark-grey-text text-center">
                     <strong>Sign Up</strong>
                   </h3>
                   <hr>
-                  {% if form.errors %}
-        {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
-    {% endfor %}
-{% endif %}
 
                   <div class="md-form">
                     <i class="fas fa-user prefix grey-text"></i>
-                    <!--<span class="text-danger small">{{ form.username.errors }}</span>-->
-                    <label>{{ form.username.label_tag }}</label>
-                    {{ form.username }}
+                    <input type="text" id="form3" class="form-control">
+                    <label for="form3">Your name</label>
                   </div>
                   <div class="md-form">
                     <i class="fas fa-envelope prefix grey-text"></i>
-                    <!--<span class="text-danger small">{{ form.email.errors }}</span>-->
-                    <label for="form2">{{ form.email.label_tag }}</label>
-                    {{ form.email }}
+                    <input type="text" id="form2" class="form-control">
+                    <label for="form2">Your email</label>
                   </div>
 
-                  <!--<div class="md-form">
+                  <div class="md-form">
                     <i class="fas fa-phone prefix grey-text"></i>
                     <input type="text" id="form2" class="form-control">
                     <label for="form2">Contact Number</label>
-                  </div>-->
+                  </div>
 
                   <div class="md-form">
                     <i class="fas fa-key prefix grey-text"></i>
-                    <!--<span class="text-danger small">{{ form.password1.errors }}</span>-->
-                    <label for="form2">{{ form.password1.label_tag }}</label>
-                    {{ form.password1 }}
+                    <input type="text" id="form2" class="form-control">
+                    <label for="form2">Password</label>
                   </div>
+
                   <div class="md-form">
-                    <i class="fas fa-key prefix grey-text"></i>
-                    <!--<span class="text-danger small">{{ form.password2.errors }}</span>-->
-                    <label for="form2">{{ form.password2.label_tag }}</label>
-                    {{ form.password2 }}
-                  </div>
-
-
-                  <!--<div class="md-form">
                     <i class="fas fa-key prefix grey-text"></i>
                     <input type="text" id="form2" class="form-control">
                     <label for="form2">Confirm Password</label>
-                  </div>-->
-                  <input type="submit">
+                  </div>
 
-                  <!--<div class="text-center">
-                    <button class="btn btn-indigo" type="submit">submit</button>
+                  <div class="text-center">
+                    <button class="btn btn-indigo">Sign up</button>
                     <hr>
                       <label for="checkbox1" class="form-check-label dark-grey-text">Already a member,click here</label>
                       <a href="index.html">
                           <button class="btn btn-indigo">Login</button>
                       </a>
-                  </div>-->
+                  </div>
 
                 </form>
                 <!-- Form -->
@@ -175,5 +147,8 @@
     <!-- Mask & flexbox options-->
 
   </div>
+  <!-- Full Page Intro -->
+
+
 </body>
-</html>
+

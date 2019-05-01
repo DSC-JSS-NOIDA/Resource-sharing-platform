@@ -74,25 +74,28 @@ def login_view(request):
     }
     return render(request, 'Resource/login.html', context)
 
-
 def register_view(request):
     current_user = request.user
     if current_user.is_authenticated:
         return redirect('Resource:index')
-    next = request.GET.get('next')
-    form = UserRegisterForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        password = form.cleaned_data.get('password')
-        user.set_password(password)
-        user.save()
-        
-        new_user = authenticate(username=user.username, password=password)
-        login(request, new_user)
-        
-        if next:
-            return redirect(next)
-        return redirect('Resource:index')
+    if request.method == 'POST':
+        next = request.GET.get('next')
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+
+            new_user = authenticate(username=username, password=password)
+            login(request, new_user)
+
+            if next:
+                return redirect(next)
+            return redirect('Resource:index')
+        else:
+            print(form.errors.as_json())
+    else:
+        form = UserRegisterForm()
     
     context = {
         'form': form,
