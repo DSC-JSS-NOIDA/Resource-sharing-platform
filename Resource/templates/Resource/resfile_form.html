@@ -3,6 +3,12 @@
 <!--{% block albums_active %}active{% endblock %}-->
 
 {% block body %}
+   <br>
+   <br>
+   <br>
+   <br>
+   <h2>Add a file:</h2>
+   <br>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% include 'Resource/form_template.html' %}

@@ -20,6 +20,7 @@ def index(request):
     context = {
         'categories' : categories,
         'index' : True,
+        'intro' : True,
     }
     return render(request, 'Resource/index.html', context)
 

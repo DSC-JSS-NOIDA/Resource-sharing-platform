@@ -18,6 +18,7 @@ class ResFile(models.Model):
     file = models.FileField(upload_to='uploads/', null=True)
     uploader = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(default=datetime.now, blank=True)
+    downloads = models.IntegerField(default=0)
     def __str__(self):
         return self.title+' by '+self.uploader.username
     def get_absolute_url(self):
