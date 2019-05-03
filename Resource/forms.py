@@ -14,7 +14,7 @@ class UserLoginForm(forms.Form):
         if username and password:
             user = authenticate(username=username, password=password)
             if not user:
-                raise forms.ValidationError('No user')
+                raise forms.ValidationError('Invalid Username or Password')
             if not user.check_password(password):
                 raise forms.ValidationError('Wrong Password')
             if not user.is_active:
@@ -30,10 +30,10 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username','email','password1', 'password2']
         widgets = {
-            'username': forms.TextInput(attrs={'class':'form-control'}),
-            'email': forms.TextInput(attrs={'class':'form-control'}),
-            'password1': forms.PasswordInput(attrs={'class':'form-control'}),
-            'password2': forms.PasswordInput(attrs={'class':'form-control'}),
+            'username': forms.TextInput(attrs={'placeholder':'Username'}),
+            'email': forms.TextInput(attrs={'placeholder':'Email'}),
+            'password1': forms.PasswordInput(attrs={'placeholder':'Password', }),
+            'password2': forms.PasswordInput(attrs={'placeholder':'Confirm Password'}),
         }
         
         

@@ -102,9 +102,7 @@
   color: #4CAF50;
   text-decoration: none;
 }
-.form .register-form {
-  display: none;
-}
+
 .container {
   position: relative;
   z-index: 1;
@@ -155,16 +153,28 @@ body {
     
     <div class="login-page">
   <div class="form">
-    <form class="register-form">
-      <input type="text" placeholder="name"/>
-      <input type="password" placeholder="password"/>
-      <input type="text" placeholder="email address"/>
-      <button>create</button>
-      <p class="message">Already registered? <a href="#">Sign In</a></p>
-    </form>
+
     <form method="post" class="login-form">
+       
         {% csrf_token %}
-        {{ form }}
+        {% if form.errors %}
+        {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+       <p>Username</p>
+        {{ form.username }}
+        <p>Password</p>
+        {{ form.password }}
       <!--<input type="text" placeholder="username"/>
       <input type="password" placeholder="password"/>-->
       <button type="submit">login</button>
