@@ -7,7 +7,6 @@ User = get_user_model()
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
-    
     def clean(self, *args, **kwargs):
         username = self.cleaned_data['username']
         password = self.cleaned_data['password']
@@ -21,6 +20,9 @@ class UserLoginForm(forms.Form):
             if not user.is_active:
                 raise forms.ValidationError('not active')
         return super(UserLoginForm, self).clean(*args, **kwargs)
+    
+    
+    
     
 class UserRegisterForm(UserCreationForm):
     
