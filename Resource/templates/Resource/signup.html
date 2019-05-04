@@ -97,7 +97,7 @@
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
-  font-size: 12px;
+  font-size: 15px;
 }
 .form .message a {
   color: #4CAF50;
@@ -175,9 +175,7 @@ body {
 {% endif %}
          {{ form.username }}
          {{ form.email }}
-         <p>Password</p>
          {{ form.password1 }}
-         <p>Confirm Password</p>
          {{ form.password2 }}
           <button type="submit">create</button>
           <p class="message">Already registered? <a href="{% url 'login_view' %}">Log In</a></p>
